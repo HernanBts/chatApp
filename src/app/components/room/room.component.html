@@ -5,18 +5,20 @@
         <ion-icon name='close'></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title text-center>{{name}}</ion-title>
+    <ion-title *ngIf="room" text-center>{{room.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
+  <ul *ngIf="room">
+    <li *ngFor="let mssg of room.messages"> {{mssg.content}} </li>
+  </ul>
 </ion-content>
 
 <ion-footer padding>
   <ion-item>
-    <ion-textarea></ion-textarea>
-    <ion-button color='success'>
+    <ion-textarea [(ngModel)]="msg"></ion-textarea>
+    <ion-button color='success' (click)="onSendMsg()">
       <ion-icon name='send'></ion-icon>
     </ion-button>
   </ion-item>

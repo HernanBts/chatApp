@@ -16,10 +16,11 @@ import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/fi
 
 import { RoomComponent } from './components/room/room.component';
 
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [AppComponent, RoomComponent],
   entryComponents: [ RoomComponent ],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+  imports: [FormsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     AngularFireAuthModule, AngularFirestoreModule, AngularFireModule.initializeApp(firebaseConfig)],
   providers: [
     StatusBar,

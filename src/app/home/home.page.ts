@@ -3,7 +3,7 @@ import { AuthService } from '../services/auth.service.spec';
 import { ChatService, Chat } from '../services/chat.service.spec';
 import { ModalController } from '@ionic/angular';
 import { RoomComponent } from '../components/room/room.component';
-
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -15,14 +15,13 @@ export class HomePage implements OnInit {
   constructor(
     private auth: AuthService,
     private chatService: ChatService,
-    private modal: ModalController
+    private modal: ModalController,
+    private alert: AlertController
   ) {}
 
   ngOnInit() {
     this.chatService.getChatRooms().subscribe( chats => {
-      chats.map( chat => {
-        this.chatRooms = chats;
-      });
+      this.chatRooms = chats;
     });
   }
 
@@ -30,12 +29,31 @@ export class HomePage implements OnInit {
     this.modal.create( {
       component: RoomComponent,
       componentProps: {
-        name: chat.name
+        chat: chat
       }
     }).then( (modal) => modal.present());
   }
 
   onLogout() {
     this.auth.logout();
+  }
+
+  onClose() {
+    this.alert.create({
+      header: 'Salir',
+      message: '¿Seguro que desea cerrar sesion?',
+      buttons: [{
+        text: 'No',
+        role: 'cancel'
+      }, {
+        text: 'Si',
+        handler: () => {
+          this.onLogout();
+        }
+      }
+    ]
+    }).then(alertEl => {
+      alertEl.present();
+    });
   }
 }
