@@ -23,4 +23,8 @@ export class LoginPage implements OnInit {
       this.router.navigate(['/home']);
     }).catch(err => alert('El usuario o contraseña son incorrectos.'));
   }
+
+  onGoToRegister() {
+    this.router.navigate(['/register']);
+  }
 }

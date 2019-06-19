@@ -25,11 +25,11 @@ export class HomePage implements OnInit {
     });
   }
 
-  onClickChat(chat) {
+  onClickChat(chats) {
     this.modal.create( {
       component: RoomComponent,
       componentProps: {
-        chat: chat
+        chat: chats
       }
     }).then( (modal) => modal.present());
   }

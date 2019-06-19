@@ -10,9 +10,14 @@
 </ion-header>
 
 <ion-content padding>
-  <ul *ngIf="room">
-    <li *ngFor="let mssg of room.messages"> {{mssg.content}} </li>
-  </ul>
+  <div *ngIf="room">
+    <ion-card *ngFor="let mssg of room.messages">
+      <ion-card-content>
+        <h2><b> {{chat.name}} </b></h2>
+        {{mssg.content}} 
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
 
 <ion-footer padding>
